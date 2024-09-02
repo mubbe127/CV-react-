@@ -1,0 +1,47 @@
+.dateContainer {
+
+display: flex;
+width: 300px;
+justify-content: center;
+gap:10px;
+}
+
+.dateContainer input{
+
+    height: 30px;
+    width: 90px;
+    font-size: 16px;
+    
+}
+
+.date.start {
+
+    padding-left: 20px;
+    
+}
+.dateContainer p {
+
+    cursor: pointer;
+    text-align: start;
+   
+}
+
+.date.end{
+
+padding-right:50px;
+
+}
+
+#to {
+   
+ padding: 0;
+ cursor: default;
+}
+
+
+.inputContainer {
+
+    display: flex;
+    align-items: center;
+
+}

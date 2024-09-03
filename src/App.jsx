@@ -8,40 +8,52 @@ import { ExperienceComponent } from "./components/ExperienceComponent";
 import "./App.css";
 
 function App() {
-  const [experience, setExperience] = useState([])
-  const [educations, setEducations] = useState([])
-  const idRef = useRef(0)
-  const newID = idRef.current++
+  const [experience, setExperience] = useState([]);
+  const [educations, setEducations] = useState([]);
+  const idRefEdu = useRef(0);
+  const newIdEdu = idRefEdu.current++;
   const refIdExp = useRef(0);
-  const newIdExp = refIdExp.current++
- 
-  function handleClick() {
+  const newIdExp = refIdExp.current++;
 
-    setEducations([...educations, {id: newID }])
+  function handleAddEducation() {
+    setEducations([...educations, { id: newIdEdu }]);
   }
-
-  function handleAddExperience() {
-    setExperience([...experience,{id:newIdExp}])
-  }
-  function handleDeleteExperience(itemId){
-      setExperience(experience.filter(experience => experience.id !== itemId))
+  
+  function handleDeleteEducation(itemId){
+    setEducations(educations.filter(education => education.id !== itemId))
     }
- 
+  
+  function handleAddExperience() {
+    setExperience([...experience, { id: newIdExp }]);
+  }
+  function handleDeleteExperience(itemId) {
+    setExperience(experience.filter(experience => experience.id !== itemId));
+  }
+
   return (
     <>
-
-  
+      <InputComponent element="h1" classNameContainer={"name"} classNameInput={"input"} classNameValue={"output"}/>
       <div>
-      <h3>Education</h3>
-      <EducationComponent/>
+        <h3>Education</h3>
+        {educations.map((education) => (
+          <EducationComponent key={education.id} handleDeleteEducation={() =>
+            handleDeleteEducation(education.id)
+          }/>
+        ))}
+        <button onClick={handleAddEducation}>Add education</button>
       </div>
 
       <div>
-        <h3>Education:</h3>
-        {experience.length !== 0 && experience.map(experience => 
-        <ExperienceComponent handleDeleteExperience={() => handleDeleteExperience(experience.id)}/>
-      )}
-        <button onClick={handleAddExperience}>Add experience:</button>    
+        <h3>Experience:</h3>
+        {experience.length !== 0 &&
+          experience.map((experience) => (
+            <ExperienceComponent key={experience.id}
+              handleDeleteExperience={() =>
+                handleDeleteExperience(experience.id)
+              }
+            />
+          ))}
+        <button onClick={handleAddExperience}>Add experience:</button>
       </div>
     </>
   );

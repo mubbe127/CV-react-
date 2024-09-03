@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import "./InputComponent.css"
 
-function InputComponent({element: Element="input", classNameContainer, classNameInput, classNameValue, type="input", placeholder}) {
+function InputComponent({element: Element="input", valueElement: ValueElement="p", classNameContainer, classNameInput, classNameValue, type="input", placeholder}) {
   const [value, setValue] = useState("");
   const [editState, setEditState] = useState(true);
   const inputRef = useRef(null)
@@ -29,10 +29,11 @@ useEffect(()=>{
   }
 
 }, [editState])
+
   return (
     <div className={classNameContainer}>
       {value !== "" && !editState ? (
-        <p className={classNameValue} onClick={handleClick}>{value}</p>
+        <ValueElement className={classNameValue} onClick={handleClick}>{value}</ValueElement>
       ) : (
         <Element
           ref={inputRef}

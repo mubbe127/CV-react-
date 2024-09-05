@@ -1,9 +1,0 @@
-.educationContainer {
-
-    display:flex;
-    width: 600px;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 50px;
-}

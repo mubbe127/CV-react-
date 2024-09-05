@@ -2,7 +2,7 @@
 
 display: flex;
 width: 300px;
-justify-content: center;
+justify-content: end;
 gap:10px;
 }
 
@@ -14,23 +14,14 @@ gap:10px;
     
 }
 
-.date.start {
 
-    padding-left: 20px;
-    
-}
 .dateContainer p {
 
     cursor: pointer;
-    text-align: start;
+   
    
 }
 
-.date.end{
-
-padding-right:50px;
-
-}
 
 #to {
    
@@ -39,9 +30,3 @@ padding-right:50px;
 }
 
 
-.inputContainer {
-
-    display: flex;
-    align-items: center;
-
-}

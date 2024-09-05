@@ -2,14 +2,14 @@ import { useState, useRef, useEffect } from "react";
 import { DateComponent } from "./dateInputComponent";
 import { InputComponent } from "./InputComponent";
 
-function ExperienceComponent({handleDeleteExperience}) {
+function ExperienceComponent({ handleDeleteExperience }) {
   const [task, setTask] = useState([]);
-
   const refIdTask = useRef(0);
   const newIdTask = refIdTask.current++;
 
   function handleAddTask() {
     setTask([...task, { id: newIdTask }]);
+    console.log(task);
   }
 
   function handleDeleteTask(itemId) {
@@ -17,21 +17,19 @@ function ExperienceComponent({handleDeleteExperience}) {
   }
 
   return (
-    <div>
-      <h3>Experience:</h3>
-
-      <div>
+    <div className="experience">
+      <InputComponent
+        inputElement="input"
+        classNameContainer="role"
+        classNameInput="experienceInput"
+        classNameOutput="experienceP"
+        type="text"
+        placeholder="Add role"
+      />
+      <div className="companyLocation">
         <InputComponent
           inputElement="input"
-          classNameContainer="experienceContainer"
-          classNameInput="experienceInput"
-          classNameOutput="experienceP"
-          type="text"
-          placeholder="Add role"
-        />
-        <InputComponent
-          inputElement="input"
-          classNameContainer="experienceContainer"
+          classNameContainer="company"
           classNameInput="experienceInput"
           classNameOutput="experienceP"
           type="text"
@@ -39,33 +37,42 @@ function ExperienceComponent({handleDeleteExperience}) {
         />
         <InputComponent
           inputElement="input"
-          classNameContainer="experienceContainer"
+          classNameContainer="location"
           classNameInput="experienceInput"
           classNameOutput="experienceP"
           type="text"
           placeholder="Add location"
         />
-        {task.length !== 0 &&
-          task.map((task) => (
-            <div class="taskContainer">
-              <InputComponent
-                key={task.id}
-                inputElement="input"
-                classNameContainer="experienceContainer"
-                classNameInput="experienceInput"
-                classNameOutput="experienceP"
-                type="text"
-                placeholder="Add responsibility"
-              />
-              <button onClick={() => handleDeleteTask(task.id)}>Delete</button>
-            </div>
-          ))}
-        <button onClick={handleAddTask}>Add responsibility</button>
-        <DateComponent />
-        <button onClick={handleDeleteExperience}>
-          Delete experience
-        </button>
       </div>
+      <div class="taskContainer">
+      {task.length !== 0 &&
+        task.map(task => (
+          <ul className="task" key={task.id}>
+            <InputComponent
+              inputElement="input"
+              outputElement="li"
+              classNameContainer="task2"
+              classNameInput="experienceInput"
+              classNameOutput="experienceP"
+              type="text"
+              placeholder="Add responsibility"
+            />
+            <button
+              className="deleteTask"
+              onClick={() => handleDeleteTask(task.id)}
+            >
+              Delete
+            </button>
+          </ul>
+        ))}
+           </div>
+      <button class="addTask" onClick={handleAddTask}>
+        Add responsibility
+      </button>
+      <DateComponent />
+      <button class="deleteButton" onClick={handleDeleteExperience}>
+        Delete experience
+      </button>
     </div>
   );
 }

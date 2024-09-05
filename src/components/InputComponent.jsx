@@ -1,45 +1,53 @@
 import { useState, useEffect, useRef } from "react";
-import "./InputComponent.css"
+import "./InputComponent.css";
 
-function InputComponent({inputElement: InputElement="input", outputElement: OutputElement="p", classNameContainer, classNameInput, classNameOutput, type="input", placeholder}) {
+function InputComponent({
+  inputElement: InputElement = "input",
+  outputElement: OutputElement = "p",
+  classNameContainer,
+  classNameInput,
+  classNameOutput,
+  type = "input",
+  placeholder,
+  readyToSubmit,
+}) {
   const [value, setValue] = useState("");
-  const [editState, setEditState] = useState(true);
-  const inputRef = useRef(null)
-  const isFirstRender = useRef(true)
+  const [editMode, setEditMode] = useState(true);
+  const inputRef = useRef(null);
+  const isFirstRender = useRef(true);
 
-function handleChange(e) {
-    setValue(e.target.value)
-}
-function handleFocus() {
-    setEditState(true)
-}
-
-function handleBlur(){
-
-    setEditState(false)
-}
-
-function handleClick() {
- setEditState(true)
-}
-
-useEffect(()=>{
-  if(isFirstRender.current){
-    isFirstRender.current=false
-    return
+  function handleChange(e) {
+    setValue(e.target.value);
   }
-  if(editState && inputRef.current) {
-
-    inputRef.current.focus()
-    console.log("jieep")
+  function handleFocus() {
+    setEditMode(true);
   }
 
-}, [editState])
+  function handleBlur() {
+    setEditMode(false);
+  }
+
+  function handleClick() {
+    setEditMode(true);
+  }
+
+  useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+    if (editMode && inputRef.current) {
+      inputRef.current.focus();
+      console.log("jieep");
+    }
+  }, [editMode]);
 
   return (
     <div className={classNameContainer}>
-      {value !== "" && !editState ? (
-        <OutputElement className={classNameOutput} onClick={handleClick}>{value}</OutputElement>
+      {value !== "" && !editMode ? (
+        <OutputElement className={classNameOutput} onClick={handleClick}>
+          {value}
+        </OutputElement>
       ) : (
         <InputElement
           ref={inputRef}
@@ -50,11 +58,10 @@ useEffect(()=>{
           onChange={handleChange}
           onFocus={handleFocus}
           onBlur={handleBlur}
-          
         />
       )}
     </div>
   );
 }
 
-export {InputComponent}
+export { InputComponent };

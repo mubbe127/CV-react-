@@ -6,26 +6,29 @@ import "./EducationComponent.css";
 /* Consider moving Add function one level up as did with experience component if you wanna add state specific to each education component*/
 function EducationComponent({ handleDeleteEducation }) {
   return (
-    <div className="educationContainer">
+    <div className="education">
+      <div className="institutionLocation">
+        <InputComponent
+          inputElement="input"
+          classNameContainer="institution"
+          classNameInput="input"
+          classNameOutput="output"
+          type="text"
+          placeholder="Add institution"
+        />
+        <p className="comma">,</p>
+        <InputComponent
+          inputElement="input"
+          classNameContainer="location"
+          classNameInput="input"
+          classNameOutput="output"
+          type="text"
+          placeholder="Add location "
+        />
+      </div>
       <InputComponent
         inputElement="input"
-        classNameContainer="institutionContainer"
-        classNameInput="input"
-        classNameOutput="output"
-        type="text"
-        placeholder="Add institution"
-      />
-      <InputComponent
-        inputElement="input"
-        classNameContainer="locationContainer"
-        classNameInput="input"
-        classNameOutput="output"
-        type="text"
-        placeholder="Add location "
-      />
-      <InputComponent
-        inputElement="input"
-        classNameContainer="degreeContainer"
+        classNameContainer="degree"
         classNameInput="input"
         classNameOutput="output"
         type="text"

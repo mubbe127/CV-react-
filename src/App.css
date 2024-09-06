@@ -52,7 +52,7 @@
 .summaryContainer h3 {
   display: flex;
   align-items: start;
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   width:120px;
 }
 
@@ -60,7 +60,7 @@
   display: flex;
 
   flex: 1;
-  margin-left: 15px;
+  margin-left: 25px;
   padding-top: 6.5px;
 }
 
@@ -78,7 +78,8 @@
 }
 .educationContainer h3 {
   align-items: start;
-  font-size: 1.5rem;
+  text-align: start;
+  font-size: 1.4rem;
   width:120px;
   flex: 0 1 auto;
 }
@@ -97,13 +98,14 @@
   grid-template-areas:
     "institutionlocation date"
     "degree button";
-  margin-left: 15px;
+  margin-left: 25px;
   margin-bottom: 50px;
 }
 
 .education .institutionLocation {
   grid-area: institutionlocation;
   display: flex;
+  font-weight: bold;
 }
 
 .education .institution {
@@ -114,9 +116,6 @@
   margin-left: 7px;
 }
 
-.education .degree p {
-  margin-top: -0.2rem;
-}
 .education .degree input {
   margin-top: 2px;
 }
@@ -151,6 +150,7 @@
 .education .degree {
   grid-area: degree;
   justify-self: start;
+  font-style: italic;
 }
 
 .education > button {
@@ -159,7 +159,6 @@
   width: 200px;
   background-color: red;
   color: white;
- 
   justify-self: end;
 }
 .education .input,
@@ -168,21 +167,29 @@
   font-size: 1.3rem;
 }
 
+.addEducation.invalid {
+
+ background-color: red;
+ color: white;
+ border: 2px solid white
+ outline: 2px solid red;
+}
 
 
 .experienceContainer {
   margin-top: 50px;
   display: flex;
 }
-.experiencenContainer h3 {
+.experienceContainer h3 {
   align-items: start;
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   width:120px;
   flex: 0 1 auto;
 }
 
 .experienceContainer2 {
   flex: 1;
+  
 }
 
 .experience {
@@ -193,28 +200,49 @@
     "companyLocation button"
     "task task"
     "responsibility responsibility";
-  margin-left: 15px;
+  margin-left: 25px;
   margin-bottom: 50px;
 }
 
-.experience .companyLocation {
-  grid-area: companyLocation;
-  display: flex;
+.experienceInput,
+.experienceP  {
+  height: 1.5rem;
+  font-size: 1.2rem;
 }
 
-.experience .company {
-  margin-right: 1px;
+
+
+.role {
+  grid-area: role;
+  justify-self: start;
+}
+
+.role .experienceP {
+
+  font-size: 1.3rem;
+  font-weight: bold;
+  padding-right: 250px;
+
+}
+
+
+.companyLocation {
+  grid-area: companyLocation;
+  display: flex;
+ 
+}
+.companyLocation input {
+  margin-top: 2px;
+}
+
+
+.companyLocation .experienceP {
+
+  font-style: italic;
 }
 
 .experience .location {
   margin-left: 7px;
-}
-
-.experience .role p {
-  /*margin-top: -0.2rem;*/
-}
-.experience .role input {
-  /* margin-top: 2px; */
 }
 
 .comma {
@@ -222,9 +250,6 @@
   font-size: 1.2rem;
 }
 
-.location .output {
-  padding-right: 200px;
-}
 
 .experience .dateContainer {
   grid-area: date;
@@ -245,10 +270,6 @@
 
 }
 
-.experience .role {
-  grid-area: role;
-  justify-self: start;
-}
 
 .experience  .deleteButton {
   grid-area: button;
@@ -256,13 +277,14 @@
   width: 200px;
   background-color: red;
   color: white;
- 
   justify-self: end;
 }
 
 .experience .addTask {
   grid-area: responsibility;
-
+  justify-self: center;
+  width: 200px;
+  margin-right: 130px;
 }
 
 .experience .taskContainer {
@@ -273,17 +295,21 @@
   justify-content: space-between;
 }
 .experience .task {
-
   display: flex;
-  justify-content: space-between; 
-}
-
-.experience .deleteTask {
-
+  justify-content: space-between;
 
 }
-.education .input,
-.education .output {
-  height: 1.5rem;
-  font-size: 1.3rem;
+
+.addExperience.invalid {
+
+  background-color: red;
+  color: white;
+  border: 2px solid white
+  outline: 2px solid red;
+ }
+
+
+.submit {
+
+  margin-top: 50px;
 }

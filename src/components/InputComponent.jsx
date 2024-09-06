@@ -1,5 +1,4 @@
 import { useState, useEffect, useRef } from "react";
-import "./InputComponent.css";
 
 function InputComponent({
   inputElement: InputElement = "input",
@@ -9,7 +8,10 @@ function InputComponent({
   classNameOutput,
   type = "input",
   placeholder,
-  readyToSubmit,
+  submit,
+  setFormData,
+  validationError,
+  setSubmit
 }) {
   const [value, setValue] = useState("");
   const [editMode, setEditMode] = useState(true);
@@ -18,6 +20,7 @@ function InputComponent({
 
   function handleChange(e) {
     setValue(e.target.value);
+    setFormData(e.target.value)
   }
   function handleFocus() {
     setEditMode(true);
@@ -28,8 +31,11 @@ function InputComponent({
   }
 
   function handleClick() {
+   
     setEditMode(true);
+    setSubmit(false)
   }
+  
 
   useEffect(() => {
     if (isFirstRender.current) {
@@ -38,18 +44,31 @@ function InputComponent({
     }
     if (editMode && inputRef.current) {
       inputRef.current.focus();
-      console.log("jieep");
+    
     }
   }, [editMode]);
 
+
+
   return (
     <div className={classNameContainer}>
-      {value !== "" && !editMode ? (
+      {value !== "" && (!editMode || submit) ? (
         <OutputElement className={classNameOutput} onClick={handleClick}>
           {value}
         </OutputElement>
-      ) : (
+      ) : validationError ? (
         <InputElement
+          ref={inputRef}
+          className={classNameInput}
+          type={type}
+          value={value}
+          placeholder= {validationError}
+          onChange={handleChange}
+          onFocus={handleFocus}
+          onBlur={handleBlur}
+        />
+      ) : (
+        <InputElement 
           ref={inputRef}
           className={classNameInput}
           type={type}

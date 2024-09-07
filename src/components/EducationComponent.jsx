@@ -6,41 +6,15 @@ import { InputComponent } from "./InputComponent";
 function EducationComponent({
   handleDeleteEducation,
   submit,
-  setSubmit,
-  setFormData,
-  validationError,
-  id,
+  setSubmit
 }) {
-  function handleFormData(key) {
-    return function setTheData(value) {
-      setFormData((prevFormData) => ({
-        ...prevFormData,
-        education: { ...prevFormData.education, [key]: value },
-      }));
-    };
-  }
-  /* function handleFormData(key, id) {
-    return function setTheData(value) {
-      setFormData((prevFormData) => {
-        prevFormData.education.map((education, index) => {
-          if (index === id) {
-            return {
-              ...education,
-              [key]: value,
-            };
-          }
-        });
-      });
-    };
-  }
-*/
+
   return (
     <div className="education">
       <div className="institutionLocation">
         <InputComponent
           submit={submit}
-          setFormData={handleFormData("institution")}
-          validationError={validationError.education?.institution}
+       
           inputElement="input"
           classNameContainer="institution"
           classNameInput="input"
@@ -52,8 +26,6 @@ function EducationComponent({
         <p className="comma">,</p>
         <InputComponent
           submit={submit}
-          setFormData={handleFormData("location")}
-          validationError={validationError.education?.location}
           inputElement="input"
           classNameContainer="location"
           classNameInput="input"
@@ -65,8 +37,6 @@ function EducationComponent({
       </div>
       <InputComponent
         submit={submit}
-        setFormData={handleFormData("degree")}
-        validationError={validationError.education?.degree}
         inputElement="input"
         classNameContainer="degree"
         classNameInput="input"

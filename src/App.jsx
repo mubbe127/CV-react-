@@ -10,116 +10,13 @@ function App() {
   const [educations, setEducations] = useState([]);
   const [submit, setSubmit] = useState(false);
   const idRefEdu = useRef(0);
-  const newIdEdu = idRefEdu.current++;
   const refIdExp = useRef(0);
-  const newIdExp = refIdExp.current++;
-  const [formData, setFormData] = useState({
-    name: "",
-    adress: "",
-    phone: "",
-    email: "",
-    summary: "",
-    education: {
-      institution: "",
-      location: "",
-      degree: "",
-    },
-    experience: {
-      role: "",
-      company: "",
-      location: "",
-      task: "",
-    },
-  });
-  const [validationError, setValidationError] = useState(false);
 
-  function handleSubmitState() {
-    let formstate = true;
 
-    const errors = {
-      name: "",
-      adress: "",
-      phone: "",
-      email: "",
-      summary: "",
-      education: {
-        institution: "",
-        location: "",
-        degree: "",
-      },
-      experience: {
-        role: "",
-        company: "",
-        location: "",
-        task: "",
-      },
-    };
 
-    if (formData.name?.trim() === "") {
-      errors.name = "Fullname is required";
-      formstate = false;
-    }
-    if (formData.adress?.trim() === "") {
-      errors.adress = "Address is required";
-      formstate = false;
-    }
-    if (formData.phone?.trim() === "") {
-      errors.phone = "Phone is required";
-      formstate = false;
-    }
-    if (formData.email?.trim() === "") {
-      errors.email = "Email is required";
-      formstate = false;
-    }
-
-    if (formData.summary?.trim() === "") {
-      errors.summary = "Summary is required";
-      formstate = false;
-    }
-
-    if (formData.education.institution?.trim() === "") {
-      errors.education.institution = "This field is required";
-      formstate = false;
-    }
-    if (formData.education.location?.trim() === "") {
-      errors.education.location = "jalla jiep";
-      formstate = false;
-    }
-    if (formData.education.degree?.trim() === "") {
-      errors.education.degree = "This field is required";
-      formstate = false;
-    }
-
-    if (formData.experience.company?.trim() === "") {
-      errors.experience.company = "Company name required";
-      formstate = false;
-    }
-
-    if (formData.experience.location?.trim() === "") {
-      errors.experience.location = "Location is required";
-      formstate = false;
-    }
-
-    if (formData.experience.role?.trim() === "") {
-      errors.experience.role = "Role is required";
-      formstate = false;
-    }
-
-    if (formData.experience.task?.trim() === "") {
-      errors.experience.task = "This is required";
-      formstate = false;
-    }
-
-    if (!formstate) {
-      setValidationError(errors);
-      setSubmit(false);
-    } else {
-      setValidationError(false);
-      setSubmit(true);
-    }
-  }
-
-  function handleAddEducation() {
+  function handleAddEducation(e) {
+    e.preventDefault()
+    const newIdEdu = idRefEdu.current++;
     setEducations([...educations, { id: newIdEdu }]);
   }
 
@@ -127,33 +24,17 @@ function App() {
     setEducations(educations.filter((education) => education.id !== itemId));
   }
 
-  function handleAddExperience() {
+  function handleAddExperience(e) {
+    e.preventDefault()
+    const newIdExp = refIdExp.current++;
     setExperience([...experience, { id: newIdExp }]);
   }
   function handleDeleteExperience(itemId) {
     setExperience(experience.filter((experience) => experience.id !== itemId));
   }
 
-  function handleFormData(key) {
-    return function setTheData(value) {
-      setFormData((prevFormData) => ({
-        ...prevFormData,
-        [key]: value, // Dynamically update the object key with the provided value
-      }));
-    };
-  }
-  /* function handleNestedFormData() {
-    setFormData((prevFormData) => {
-      prevFormData.education.push({
-        institution: "",
-        location: "",
-        degree: "",
-      });
-    });
-  } */
-
   return (
-    <div className="cvContainer">
+    <form className="cvContainer">
       <InputComponent
         inputElement="input"
         outputElement="h1"
@@ -162,8 +43,6 @@ function App() {
         classNameOutput="output"
         placeholder="Fullname"
         submit={submit}
-        setFormData={handleFormData("name")}
-        validationError={validationError.name}
         setSubmit={setSubmit}
       />
       <InputComponent
@@ -174,8 +53,6 @@ function App() {
         classNameOutput="output"
         placeholder="Adress"
         submit={submit}
-        setFormData={handleFormData("adress")}
-        validationError={validationError.adress}
         setSubmit={setSubmit}
       />
       <div className="telEmailContainer">
@@ -188,8 +65,6 @@ function App() {
           classNameOutput="output"
           placeholder="Add phone"
           submit={submit}
-          setFormData={handleFormData("phone")}
-          validationError={validationError.phone}
           setSubmit={setSubmit}
         />
         <InputComponent
@@ -201,8 +76,6 @@ function App() {
           classNameOutput="output"
           placeholder="Add email"
           submit={submit}
-          setFormData={handleFormData("email")}
-          validationError={validationError.email}
           setSubmit={setSubmit}
         />
       </div>
@@ -217,8 +90,6 @@ function App() {
           classNameOutput="output"
           placeholder="Add summary text"
           submit={submit}
-          setFormData={handleFormData("summary")}
-          validationError={validationError.summary}
           setSubmit={setSubmit}
         />
       </div>
@@ -229,8 +100,6 @@ function App() {
             {educations.map((education) => (
               <EducationComponent
                 submit={submit}
-                setFormData={setFormData}
-                validationError={validationError}
                 setSubmit={setSubmit}
                 key={education.id}
                 id={education.id}
@@ -243,11 +112,7 @@ function App() {
         </div>
         <div className="addEducation">
           <button
-            className={
-              educations.length < 1 && validationError
-                ? "addEducation invalid"
-                : "addEducation"
-            }
+            className="addEducation"
             onClick={handleAddEducation}
           >
             Add education
@@ -262,8 +127,6 @@ function App() {
               experience.map((experience) => (
                 <ExperienceComponent
                   setSubmit={setSubmit}
-                  setFormData={setFormData}
-                  validationError={validationError}
                   submit={submit}
                   key={experience.id}
                   handleDeleteExperience={() =>
@@ -274,20 +137,16 @@ function App() {
           </div>
         </div>
         <button
-          className={
-            experience.length < 1 && validationError
-              ? "addExperience invalid"
-              : "addExperience"
-          }
+          className="addExperience"
           onClick={handleAddExperience}
         >
           Add experience:
         </button>
       </div>
-      <button className="submit" onClick={handleSubmitState}>
+      <button className="submit" type="submit">
         Submit
       </button>
-    </div>
+    </form>
   );
 }
 

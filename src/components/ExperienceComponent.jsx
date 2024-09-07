@@ -5,9 +5,10 @@ import { InputComponent } from "./InputComponent";
 function ExperienceComponent({ handleDeleteExperience, submit, setSubmit, setFormData, validationError }) {
   const [task, setTask] = useState([]);
   const refIdTask = useRef(0);
-  const newIdTask = refIdTask.current++;
+
 
   function handleAddTask() {
+    const newIdTask = refIdTask.current++;
     setTask([...task, { id: newIdTask }]);
     console.log(task);
   }
@@ -15,24 +16,12 @@ function ExperienceComponent({ handleDeleteExperience, submit, setSubmit, setFor
   function handleDeleteTask(itemId) {
     setTask(task.filter((task) => task.id !== itemId));
   }
-  function handleFormData(key) {
-    return function setTheData(value) {
-      setFormData((prevFormData) => ({
-        ...prevFormData,
-       experience: {...prevFormData.experience,
-        [key]:value
-       }
-      }));
-    };
-  }
+  
 
   return (
     <div className="experience">
       <InputComponent
         submit={submit}
-        setFormData= {setFormData}
-        validationError = {validationError.experience?.role}
-        setFormData={handleFormData("role")}
         inputElement="input"
         classNameContainer="role"
         classNameInput="experienceInput"
@@ -44,9 +33,9 @@ function ExperienceComponent({ handleDeleteExperience, submit, setSubmit, setFor
       <div className="companyLocation">
         <InputComponent
           submit={submit}
-        validationError = {validationError.experience?.company}
+     
           inputElement="input"
-          setFormData={handleFormData("company")}
+
           classNameContainer="company"
           classNameInput="experienceInput"
           classNameOutput="experienceP"
@@ -57,8 +46,7 @@ function ExperienceComponent({ handleDeleteExperience, submit, setSubmit, setFor
         <p className="comma">,</p>
         <InputComponent
           submit={submit}
-          setFormData={handleFormData("location")}
-          validationError = {validationError.experience?.location}
+
           inputElement="input"
           classNameContainer="location"
           classNameInput="experienceInput"
@@ -74,8 +62,6 @@ function ExperienceComponent({ handleDeleteExperience, submit, setSubmit, setFor
             <ul className="task" key={task.id}>
               <InputComponent
                submit={submit}
-               setFormData={handleFormData("task")}
-               validationError = {validationError.experience?.task}
                 inputElement="input"
                 outputElement="li"
                 classNameContainer="task2"

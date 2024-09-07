@@ -9,8 +9,6 @@ function InputComponent({
   type = "input",
   placeholder,
   submit,
-  setFormData,
-  validationError,
   setSubmit
 }) {
   const [value, setValue] = useState("");
@@ -20,14 +18,20 @@ function InputComponent({
 
   function handleChange(e) {
     setValue(e.target.value);
-    setFormData(e.target.value)
+
   }
   function handleFocus() {
     setEditMode(true);
   }
 
-  function handleBlur() {
+  function handleBlur(e) {
+   if(e.target.checkValidity()){
     setEditMode(false);
+    return
+   }
+
+   console.log("invalid")
+    
   }
 
   function handleClick() {
@@ -56,17 +60,6 @@ function InputComponent({
         <OutputElement className={classNameOutput} onClick={handleClick}>
           {value}
         </OutputElement>
-      ) : validationError ? (
-        <InputElement
-          ref={inputRef}
-          className={classNameInput}
-          type={type}
-          value={value}
-          placeholder= {validationError}
-          onChange={handleChange}
-          onFocus={handleFocus}
-          onBlur={handleBlur}
-        />
       ) : (
         <InputElement 
           ref={inputRef}
@@ -77,6 +70,8 @@ function InputComponent({
           onChange={handleChange}
           onFocus={handleFocus}
           onBlur={handleBlur}
+          required
+          
         />
       )}
     </div>

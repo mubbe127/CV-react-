@@ -313,3 +313,8 @@
 
   margin-top: 50px;
 }
+
+input:invalid {
+
+  border: 1px solid red;
+}

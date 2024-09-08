@@ -46,7 +46,7 @@ function EducationComponent({
         setSubmit={setSubmit}
       />
       <DateComponent />
-      <button onClick={handleDeleteEducation}>Delete education</button>
+      {submit ? null: <button onClick={handleDeleteEducation}>Delete education</button> }
     </div>
   );
 }

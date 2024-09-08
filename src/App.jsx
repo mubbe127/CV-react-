@@ -8,7 +8,7 @@ import "./App.css";
 function App() {
   const [experience, setExperience] = useState([]);
   const [educations, setEducations] = useState([]);
-  const [submit, setSubmit] = useState(false);
+  const [submit, setSubmit] = useState(null);
   const idRefEdu = useRef(0);
   const refIdExp = useRef(0);
 
@@ -24,7 +24,7 @@ function App() {
     setEducations(educations.filter((education) => education.id !== itemId));
   }
 
-  function handleAddExperience(e) {
+  function handleAddExperience(e) { 
     e.preventDefault()
     const newIdExp = refIdExp.current++;
     setExperience([...experience, { id: newIdExp }]);
@@ -33,8 +33,29 @@ function App() {
     setExperience(experience.filter((experience) => experience.id !== itemId));
   }
 
+  function handleSubmit(e){
+
+    console.log("jiep")
+    if(educations.length<1 || experience.length<1){
+      setSubmit(false)
+      e.preventDefault()
+      return 
+    }
+
+  }
+  function onSubmit(e){
+
+    e.preventDefault()
+    
+    if(e.target.reportValidity()) {
+
+      setSubmit(true)
+    
+    }
+  }
+  
   return (
-    <form className="cvContainer">
+    <form onSubmit={onSubmit} className="cvContainer">
       <InputComponent
         inputElement="input"
         outputElement="h1"
@@ -111,12 +132,12 @@ function App() {
           </div>
         </div>
         <div className="addEducation">
-          <button
-            className="addEducation"
+          {submit ? null : <button
+            className={educations.length<1 && submit===false ? "addEducation invalid" : "addEducation"}
             onClick={handleAddEducation}
           >
             Add education
-          </button>
+          </button> }
         </div>
       </div>
       <div>
@@ -135,17 +156,16 @@ function App() {
                 />
               ))}
           </div>
-        </div>
+        </div> { submit ? null :
         <button
-          className="addExperience"
+          className={experience.length<1 && submit===false ? "addExperience invalid" : "addExperience"}
           onClick={handleAddExperience}
         >
           Add experience:
-        </button>
-      </div>
-      <button className="submit" type="submit">
+        </button> }
+      </div> {submit ? null: <button className="submit" type="submit" onClick={handleSubmit} >
         Submit
-      </button>
+      </button> }
     </form>
   );
 }

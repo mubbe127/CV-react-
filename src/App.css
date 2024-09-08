@@ -10,7 +10,8 @@
 }
 
 .cvContainer {
-  width: 1000px;
+  width: 1100px;
+  margin-top: 50px;
 }
 
 .name .input,
@@ -18,18 +19,24 @@
   font-size: 70px;
   text-align: center;
 }
-
+.adress {
+  margin-top: 10px;
+}
 .adress .input,
 .adress .output {
   width: 700px;
   height: 1.5rem;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   text-align: center;
+}
+.adress .output {
+  margin: 0 auto;
 }
 
 .telEmailContainer {
   display: flex;
   justify-content: center;
+  margin-top: 5px; 
 }
 
 .tel .input,
@@ -61,7 +68,7 @@
 
   flex: 1;
   margin-left: 25px;
-  padding-top: 6.5px;
+  padding-top: 5px;
 }
 
 .summary .input,
@@ -169,10 +176,10 @@
 
 .addEducation.invalid {
 
- background-color: red;
- color: white;
- border: 2px solid white
- outline: 2px solid red;
+
+ color: rgb(1, 1, 1);
+ border: 2px solid red
+ 
 }
 
 
@@ -193,7 +200,7 @@
 }
 
 .experience {
-  padding-top: 3.5px;
+  padding-top: 4px;
   display: grid;
   grid-template-areas:
     "role date"
@@ -302,10 +309,9 @@
 
 .addExperience.invalid {
 
-  background-color: red;
-  color: white;
-  border: 2px solid white
-  outline: 2px solid red;
+
+  border: 2px solid red;
+
  }
 
 

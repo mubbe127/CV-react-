@@ -17,11 +17,14 @@ function DateComponent() {
   }
 
   function handleBlur(e) {
+
+    if(e.target.checkValidity()){
     const { name } = e.target;
     setCompletedFields({
       ...completedFields,
       [name]: true,
-    });
+    });}
+
   }
   function onFocus(e) {
     const { name } = e.target;
@@ -76,6 +79,8 @@ function DateComponent() {
             onChange={handleChange}
             onBlur={handleBlur}
             value={date.start}
+         
+            required
           />
         </div>
       )}
@@ -97,6 +102,7 @@ function DateComponent() {
             onChange={handleChange}
             onBlur={handleBlur}
             value={date.end}
+            required
           />
         </div>
       )}

@@ -71,22 +71,22 @@ function ExperienceComponent({ handleDeleteExperience, submit, setSubmit, setFor
                 placeholder="Add responsibility"
                 setSubmit={setSubmit}
               />
-              <button
+              {submit ? null :<button
                 className="deleteTask"
                 onClick={() => handleDeleteTask(task.id)}
               >
                 Delete
-              </button>
+              </button> }
             </ul>
           ))}
       </div>
-      <button className="addTask" onClick={handleAddTask}>
+      {submit ? null :<button className="addTask" onClick={handleAddTask}>
         Add responsibility
-      </button>
+      </button> }
       <DateComponent />
-      <button className="deleteButton" onClick={handleDeleteExperience}>
+      {submit ? null :<button className="deleteButton" onClick={handleDeleteExperience}>
         Delete experience
-      </button>
+      </button> }
     </div>
   );
 }

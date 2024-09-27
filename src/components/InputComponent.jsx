@@ -59,7 +59,6 @@ function InputComponent({
 
   return (
     <div className={classNameContainer}>
-      <div><h1>JALLA MANNEN</h1></div>
       {value !== "" && (!editMode || submit) ? (
         <OutputElement className={classNameOutput} onClick={handleClick}>
           {value}
